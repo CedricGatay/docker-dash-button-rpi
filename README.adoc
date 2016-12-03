@@ -1,5 +1,11 @@
 # Dash button container for ARMHF
 
+##Dockerimage
+
+[![](https://images.microbadger.com/badges/image/cgatay/dash-button-rpi.svg)](https://microbadger.com/images/cgatay/dash-button-rpi "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/cgatay/dash-button-rpi.svg)](https://microbadger.com/images/cgatay/dash-button-rpi "Get your own version badge on microbadger.com")
+
+
 WARNING: This container can only be used when running on the docker host network layer, as it basically scans ARP/UDP packets to find out when your Dash button is registering on your local network.
 
 It consists in a basic script doing a HTTP Call when the button with the specified mac address is seen on the network. The HTTP call is carrying basic authentication header. Its main use case for the time being is triggering a Virtual Switch in Domoticz, which in turns triggers events / scenariis.
