@@ -1,0 +1,26 @@
+# Dash button container for ARMHF
+
+WARNING: This container can only be used when running on the docker host network layer, as it basically scans ARP/UDP packets to find out when your Dash button is registering on your local network.
+
+It consists in a basic script doing a HTTP Call when the button with the specified mac address is seen on the network. The HTTP call is carrying basic authentication header. Its main use case for the time being is triggering a Virtual Switch in Domoticz, which in turns triggers events / scenariis.
+
+## Finding your dash button
+
+The first step is to find your button on your local network, you will need to get its mac address. The first configurations step of the Dash button through Amazon mobile app must be completed.
+
+[source,bash]
+----
+docker run -ti --rm --net=host dash-docker findbutton
+----
+
+Press the dash button, it will print out a lot of records (depending on the size of your network), pay attention to the lines mentionning "Amazon", the MAC Address is at the beginning of the line separated by ":". Write it down, and go to the next step.
+
+## Running a container per button
+
+Copy and change the content of the `sample.env` file to your liking (I tend to use the brand labeled on the button).
+Then edit the URL you want to call to your liking (if you're using Domoticz, you need to fill in the server IP and switch index), and add the MAC Address you found in the step 1 in the proper variable.
+
+[source,bash]
+----
+BRAND='mybrand' docker run -d --name=dash-$BRAND --restart=always --net=host --env-file $BRAND.env cgatay/dash-docker
+----
