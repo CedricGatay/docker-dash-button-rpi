@@ -10,7 +10,7 @@ The first step is to find your button on your local network, you will need to ge
 
 [source,bash]
 ----
-docker run -ti --rm --net=host dash-docker findbutton
+docker run -ti --rm --net=host cgatay/dash-button-rpi findbutton
 ----
 
 Press the dash button, it will print out a lot of records (depending on the size of your network), pay attention to the lines mentionning "Amazon", the MAC Address is at the beginning of the line separated by ":". Write it down, and go to the next step.
@@ -22,5 +22,5 @@ Then edit the URL you want to call to your liking (if you're using Domoticz, you
 
 [source,bash]
 ----
-BRAND='mybrand' docker run -d --name=dash-$BRAND --restart=always --net=host --env-file $BRAND.env cgatay/dash-docker
+BRAND='mybrand' docker run -d --name=dash-$BRAND --restart=always --net=host --env-file $BRAND.env cgatay/dash-button-rpi
 ----
