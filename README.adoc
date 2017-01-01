@@ -17,7 +17,7 @@ The first step is to find your button on your local network, you will need to ge
 docker run -ti --rm --net=host cgatay/dash-button-rpi findbutton
 ----
 
-Press the dash button, it will print out a lot of records (depending on the size of your network), pay attention to the lines mentionning "Amazon", the MAC Address is at the beginning of the line separated by ":". Write it down, and go to the next step.
+Press the dash button, it will print out a lot of records (depending on the size of your network), pay attention to the lines mentionning "Amazon" or "unknown" (starting with `34:d2`), the MAC Address is at the beginning of the line separated by ":". Write it down, and go to the next step.
 
 ## Running a container per button
 
@@ -28,3 +28,9 @@ Then edit the URL you want to call to your liking (if you're using Domoticz, you
 ----
 BRAND='mybrand' docker run -d --name=dash-$BRAND --restart=always --net=host --env-file $BRAND.env cgatay/dash-button-rpi
 ----
+
+### Running all containers
+
+If you are, like me, using a lot of buttons, it can be cumbersome to start them all at once. A small `run.sh` script exists in this repository to allow you to launch a container per `.env` file found in the current directory.
+
+It drops existing ones (if any) before starting any new one (and only targets the ones with an existing `.env` file.
