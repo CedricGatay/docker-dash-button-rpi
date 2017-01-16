@@ -15,9 +15,9 @@ WORKDIR /app
 ADD app.js /app/app.js
 
 ENV NODE_PATH=/usr/local/lib/node_modules \
-    DASH_MAC '00:00:00:00:00:00' \
-    AUTH '' \
-    URL '' \
-    METHOD 'GET'
+    DASH_MAC='00:00:00:00:00:00' \
+    AUTH='' \
+    URL='' \
+    METHOD='GET'
 
 CMD ["node", "app.js"]
